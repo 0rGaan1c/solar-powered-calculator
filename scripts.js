@@ -32,8 +32,7 @@ function button(pressed) {
         screenOutput = '';
     }
 
-    // Display numbers pressed on the screen, also storing them in
-    // the internal memory to perform calculations on
+    // Functionality for number buttons (zero through nine)
     if (typeof pressed === 'number') {
         screenOutput += pressed.toString();
     
