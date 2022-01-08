@@ -8,17 +8,19 @@ TODO:
     * Turning dark mode off should subtract from the power off timer
 */
 
-// Set up the screen
+// Initial setting up of the screen
 let screenOutput = '0';
 let screen = document.getElementById("screen");
 screen.textContent = screenOutput;
-// let calculationToPerform = '';
 
 // Clear the display after a result is shown
 let equalsPressed = false;
 
-let darkModeOn = false;
+// Not currently used, may be used later:
+// let calculationToPerform = '';
+// let darkModeOn = false;
 
+// Called when buttons are pressed; the meat & bones of the calculator
 function button(pressed) {
     // Clear the display after a result is shown
     if (equalsPressed) {
@@ -34,8 +36,11 @@ function button(pressed) {
     // the internal memory to perform calculations on
     if (typeof pressed === 'number') {
         screenOutput += pressed.toString();
+    
+    // Functionality for buttons other than numbers
     } else {
         switch (pressed) {
+
             case 'clear':
                 screenOutput = '0';
                 break;
@@ -47,7 +52,6 @@ function button(pressed) {
                 break;
             
             // Math operations
-
             case 'add':
                 screenOutput += '+';
                 break;
@@ -60,7 +64,6 @@ function button(pressed) {
             case 'divide':
                 screenOutput += '/';
                 break;
-
             case 'modulo':
                 screenOutput += '%';
                 break;
@@ -70,7 +73,6 @@ function button(pressed) {
             case 'closeparen':
                 screenOutput += ')';
                 break;
-            
             case 'equals':
                 equalsPressed = true;
                 screenOutput = eval(screenOutput);
@@ -81,7 +83,7 @@ function button(pressed) {
         }
     }
     
-    // Don't display nothing
+    // Don't display nothing (doesn't always work; see BUGS)
     if (screenOutput === '') {
         screenOutput = '0';
     }
@@ -90,9 +92,10 @@ function button(pressed) {
 
 }
 
+// Turn the page dark; needs some CSS to work
 function darkMode() {
     let element = document.body;
     element.classList.toggle("dark-mode");
-    darkModeOn = true;
+    // darkModeOn = true;
 
 }
