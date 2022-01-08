@@ -1,8 +1,10 @@
 /* 
 BUGS: 
-  * Equals sign sometimes blanks out display
   * Not able to perform calculations on the result of another
     calculation (after equals is pressed)
+BUGS which appear to be fixed:
+  * Equals sign sometimes blanks out display 
+
 TODO:
   * Make calculator 'power off' after dark mode is on for too long
     * Turning dark mode off should subtract from the power off timer
@@ -26,20 +28,17 @@ function button(pressed) {
     if (equalsPressed) {
         screenOutput = '';
     }
-
     // Don't display a leading zero
     if (screenOutput === '0') {
         screenOutput = '';
     }
-
     // Functionality for number buttons (zero through nine)
     if (typeof pressed === 'number') {
         screenOutput += pressed.toString();
     
-    // Functionality for buttons other than numbers
     } else {
         switch (pressed) {
-
+            // Functionality for buttons other than numbers
             case 'clear':
                 screenOutput = '0';
                 break;
@@ -72,6 +71,8 @@ function button(pressed) {
             case 'closeparen':
                 screenOutput += ')';
                 break;
+            
+            // Perform the calculation
             case 'equals':
                 equalsPressed = true;
                 screenOutput = eval(screenOutput);
@@ -81,9 +82,11 @@ function button(pressed) {
                 break;
         }
     }
+    // For debugging blank display:
+    console.log(screenOutput);
     
-    // Don't display nothing (doesn't always work; see BUGS)
-    if (screenOutput === '') {
+    // Don't display nothing
+    if (screenOutput === '' || typeof screenOutput === 'undefined') {
         screenOutput = '0';
     }
     // Update the display
