@@ -1,35 +1,40 @@
-let internalInput = '';
-let displayOutput = '0';
+// let calculationToPerform = '';
+let screenOutput = '0';
 let screen = document.getElementById("screen");
 
 // Setup the screen
-screen.textContent = displayOutput;
+screen.textContent = screenOutput;
 
 function button(pressed) {
     // Don't display a leading zero
-    if (displayOutput === '0') {
-        displayOutput = '';
+    if (screenOutput === '0') {
+        screenOutput = '';
     }
 
     // Display numbers pressed on the screen, also storing them in
     // the internal memory to perform calculations on
     if (typeof pressed === 'number') {
-        internalInput += pressed.toString();
-        displayOutput += pressed.toString();
+        screenOutput += pressed.toString();
     } else {
         switch (pressed) {
             case 'clear':
-                internalInput = '';
-                displayOutput = '0';
+                screenOutput = '0';
+                break;
+            
+            case 'delete':
+                screenOutput = screenOutput.substring(0, screenOutput.length - 1);
                 break;
 
             default:
                 break;
         }
     }
-
+    // Don't display nothing
+    if (screenOutput === '') {
+        screenOutput = '0';
+    }
     // Update the display
-    screen.textContent = displayOutput;
+    screen.textContent = screenOutput;
 
 }
 
