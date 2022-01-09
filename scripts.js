@@ -16,15 +16,14 @@ TODO:
 
 // Initial setting up of the screen
 let screenOutput = '0';
-let screen = document.getElementById("screen");
+let screen = document.querySelector("#screen");
 screen.textContent = screenOutput;
 
 // Clear the display after a result is shown
 let equalsPressed = false;
+// To disallow nonsense input (operators without numbers in-between)
+let numberPressed = false;
 
-// Not currently used, may be used later:
-// let calculationToPerform = '';
-// let darkModeOn = false;
 
 // Called when buttons are pressed; the meat & bones of the calculator
 function button(pressed) {
@@ -35,6 +34,9 @@ function button(pressed) {
     }
     // Functionality for number buttons (zero through nine)
     if (typeof pressed === 'number') {
+        // To disallow nonsense input (operators without numbers in-between)
+        numberPressed = true;
+
         // Clear the display after a result is shown
         if (equalsPressed) {
             console.log('equalsPressed is true; resetting display...')
@@ -56,31 +58,55 @@ function button(pressed) {
             case 'delete':
                 screenOutput = screenOutput.substring(0, screenOutput.length - 1);
                 break;
+
             case 'decimal':
-                screenOutput += '.';
+                if (numberPressed) {
+                    screenOutput += '.';
+                }
                 break;
-            
+
             // Math operations
+
             case 'add':
-                screenOutput += '+';
+                if (numberPressed) {
+                    screenOutput += '+';
+                }
                 break;
+
             case 'subtract':
-                screenOutput += '-';
+                if (numberPressed) {
+                    screenOutput += '-';
+                }
                 break;
+
             case 'multiply':
-                screenOutput += '*';
+                if (numberPressed) {
+                    screenOutput += '*';
+                }
                 break;
+
             case 'divide':
-                screenOutput += '/';
+                if (numberPressed) {
+                    screenOutput += '/';
+                }
                 break;
+
             case 'modulo':
-                screenOutput += '%';
+                if (numberPressed) {
+                    screenOutput += '%';
+                }
                 break;
+
             case 'openparen':
-                screenOutput += '(';
+                if (numberPressed) {
+                    screenOutput += '(';
+                }
                 break;
+
             case 'closeparen':
-                screenOutput += ')';
+                if (numberPressed) {
+                    screenOutput += ')';
+                }
                 break;
             
             // Perform the calculation
@@ -91,6 +117,9 @@ function button(pressed) {
 
             default:
                 break;
+        }
+        if (!equalsPressed) {
+            numberPressed = false;
         }
     }
     // For debugging blank display:
@@ -109,5 +138,4 @@ function button(pressed) {
 function darkMode() {
     let element = document.body;
     element.classList.toggle("dark-mode");
-    // darkModeOn = true;
 }
