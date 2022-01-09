@@ -2,17 +2,12 @@
 THESE NEED TO BE ISSUES ON THE ISSUE TRACKER:
 
 BUGS: 
-  3. Not able to perform calculations on the result of another
-    calculation (after equals is pressed)
-    * Only partially fixed. To reproduce bug:
-        * Enter in any number or expression
-        * Hit '='
-        * Enter another operation, followed by a number
-            * When entering the number, the display resets to zero
   4. Nonsense input (multiple operators between two numbers) is allowed
 
 BUGS which appear to be fixed:
   1. Equals sign sometimes blanks out display
+  3. Not able to perform calculations on the result of another
+     calculation (after equals is pressed)
 
 TODO:
   2. Make calculator 'power off' after dark mode is on for too long
@@ -40,15 +35,19 @@ function button(pressed) {
     }
     // Functionality for number buttons (zero through nine)
     if (typeof pressed === 'number') {
+        // Clear the display after a result is shown
+        if (equalsPressed) {
+            console.log('equalsPressed is true; resetting display...')
+            equalsPressed = false;
+            screenOutput = '';
+        }
         screenOutput += pressed.toString();
 
-        // Clear the display after a result is shown and 
-        if (equalsPressed) {
-            screenOutput = '';
-            equalsPressed = false;
-    }
-    
     } else {
+        if (equalsPressed) {
+            equalsPressed = false;
+        }
+        
         switch (pressed) {
             // Functionality for buttons other than numbers
             case 'clear':
@@ -87,7 +86,7 @@ function button(pressed) {
             // Perform the calculation
             case 'equals':
                 equalsPressed = true;
-                screenOutput = eval(screenOutput);
+                screenOutput = String(eval(screenOutput));
                 break;
 
             default:
@@ -95,10 +94,10 @@ function button(pressed) {
         }
     }
     // For debugging blank display:
-    console.log(screenOutput);
+    // console.log(screenOutput);
     
     // Don't display nothing
-    if (screenOutput === '' || typeof screenOutput === 'undefined') {
+    if (screenOutput === '' || typeof screenOutput === 'undefined' || screenOutput === 'undefined') {
         screenOutput = '0';
     }
     // Update the display
