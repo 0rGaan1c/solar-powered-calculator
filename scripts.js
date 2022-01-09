@@ -31,6 +31,7 @@ function button(pressed) {
     // Clear the display after a result is shown
     if (equalsPressed) {
         screenOutput = '';
+        equalsPressed = false;
     }
     // Don't display a leading zero
     if (screenOutput === '0') {
