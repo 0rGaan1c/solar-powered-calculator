@@ -1,9 +1,13 @@
 /* 
 BUGS: 
+  * Equals sign sometimes blanks out display 
+    * typeof screenDisplay === 'undefined' did NOT fix this;
+      it introduced even more buggy behaviour!
   * Not able to perform calculations on the result of another
     calculation (after equals is pressed)
+
 BUGS which appear to be fixed:
-  * Equals sign sometimes blanks out display 
+  * (nothing :-( )
 
 TODO:
   * Make calculator 'power off' after dark mode is on for too long
@@ -99,5 +103,4 @@ function darkMode() {
     let element = document.body;
     element.classList.toggle("dark-mode");
     // darkModeOn = true;
-
 }
