@@ -1,16 +1,21 @@
 /* 
+THESE NEED TO BE ISSUES ON THE ISSUE TRACKER:
+
 BUGS: 
-  * Equals sign sometimes blanks out display 
-    * typeof screenDisplay === 'undefined' did NOT fix this;
-      it introduced even more buggy behaviour!
-  * Not able to perform calculations on the result of another
+  3. Not able to perform calculations on the result of another
     calculation (after equals is pressed)
+    * Only partially fixed. To reproduce bug:
+        * Enter in any number or expression
+        * Hit '='
+        * Enter another operation, followed by a number
+            * When entering the number, the display resets to zero
+  4. Nonsense input (multiple operators between two numbers) is allowed
 
 BUGS which appear to be fixed:
-  * (nothing :-( )
+  1. Equals sign sometimes blanks out display
 
 TODO:
-  * Make calculator 'power off' after dark mode is on for too long
+  2. Make calculator 'power off' after dark mode is on for too long
     * Turning dark mode off should subtract from the power off timer
 */
 
@@ -28,11 +33,7 @@ let equalsPressed = false;
 
 // Called when buttons are pressed; the meat & bones of the calculator
 function button(pressed) {
-    // Clear the display after a result is shown
-    if (equalsPressed) {
-        screenOutput = '';
-        equalsPressed = false;
-    }
+
     // Don't display a leading zero
     if (screenOutput === '0') {
         screenOutput = '';
@@ -40,6 +41,12 @@ function button(pressed) {
     // Functionality for number buttons (zero through nine)
     if (typeof pressed === 'number') {
         screenOutput += pressed.toString();
+
+        // Clear the display after a result is shown and 
+        if (equalsPressed) {
+            screenOutput = '';
+            equalsPressed = false;
+    }
     
     } else {
         switch (pressed) {
