@@ -32,8 +32,7 @@ let errorThrown = false;
 let equalsPressed = false;
 // To disallow nonsense input (operators without numbers in-between)
 let numberPressed = false;
-// For calculator power down due to lack of 'light'
-let batteryDead = false;
+// Keep track of current state of lights (dark/light mode)
 let lightsOn = true;
 // Battery capacity, in seconds, is random between 5 and 10 seconds, inclusive
 // Will be changed to be between 10 and 15 seconds, or something like that
@@ -66,11 +65,18 @@ function button(pressed) {
         if (equalsPressed) {
             console.log('equalsPressed is true; resetting display...');
             equalsPressed = false;
+
+            // Needed to prevent unnecessary resetting of display:
+            // see a few lines below
+            errorThrown = false;
+
             screenOutput = '';
         }
         screenOutput += pressed.toString();
 
     } else {
+        // Don't reset the display if it's already been reset, thanks to 
+        // "errorThrown = false;" line above (see above)
         if (equalsPressed) {
             equalsPressed = false;
         }
@@ -162,8 +168,6 @@ function button(pressed) {
             numberPressed = false;
         }
     }
-    // For debugging blank display:
-    // console.log(screenOutput);
     
     // Don't display nothing
     if (screenOutput === '' || typeof screenOutput === 'undefined' || screenOutput === 'undefined') {
@@ -185,6 +189,9 @@ function chargeBattery(discharge) {
         if (!lightsOn) {
             if (batteryCharge > 0) {
                 batteryCharge -= 1000;
+            } else {
+                clearInterval(chargeTimer);
+                return;
             }
             console.log(`Battery charge at ${batteryCharge}`)
         } 
@@ -194,6 +201,9 @@ function chargeBattery(discharge) {
         if (lightsOn) {
             if (batteryCharge < batteryCapacity) {
                 batteryCharge += 1000;
+            } else {
+                clearInterval(chargeTimer);
+                return;
             }
             console.log(`Battery charge at ${batteryCharge}`)
         }
