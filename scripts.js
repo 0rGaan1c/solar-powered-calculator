@@ -187,7 +187,7 @@ function button(pressed) {
 
 // Charge and discharge the battery. If discharge is true, discharge (drain);
 // otherwise, charge (fill up) the battery.
-function chargeBattery(discharge) {
+function chargeBattery(discharge, amount=1000) {
     // Discharging
     if (discharge) {
         if (!lightsOn) {
@@ -237,6 +237,8 @@ function darkMode() {
     // of the lights
     if (lightsOn) {
         clearInterval(chargeTimer);
+        // So that the calculator immediately works when light is on
+        chargeBattery(false, 1)
         chargeTimer = setInterval(chargeBattery, 1000, false);
         console.log('Began charging the battery')
     } else {
