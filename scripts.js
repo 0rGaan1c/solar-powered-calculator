@@ -41,6 +41,10 @@ console.log(`Battery capacity is ${batteryCapacity}`);
 let batteryCharge = batteryCapacity;
 let chargeTimer = undefined;
 
+// Set up lightbulb
+document.querySelector(".img-dark").style.display = "none";
+document.querySelector(".img-light").style.display = "block";
+
 
 ///// Core calculator functionality
 
@@ -215,9 +219,19 @@ function darkMode() {
     // Keep track of current state of the lights
     lightsOn = !lightsOn;
 
-    // Visual effect of turning the lights off
+    // Visual effects of turning the lights off: toggle page colors
     let element = document.body;
-    element.classList.toggle("dark-mode");
+    element.classList.toggle("body-dark-mode");
+    element.classList.toggle("border-dark-mode");
+    element.classList.toggle("background-dark-mode");
+    // Visual effect of turning the lights off: toggle lightbulb image
+    if (lightsOn) {
+        document.querySelector(".img-dark").style.display = "none";
+        document.querySelector(".img-light").style.display = "block";
+    } else {
+        document.querySelector(".img-dark").style.display = "block";
+        document.querySelector(".img-light").style.display = "none";
+    }
 
     // Charge/discharge the battery, according to the current state
     // of the lights
