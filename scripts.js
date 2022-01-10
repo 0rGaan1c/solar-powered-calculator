@@ -138,7 +138,14 @@ function button(pressed) {
             // Perform the calculation
             case 'equals':
                 equalsPressed = true;
-                screenOutput = String(eval(screenOutput));
+
+                // Catch syntax errors
+                try {
+                    screenOutput = String(eval(screenOutput));
+                } catch (error) {
+                    screenOutput = 'ERROR';
+                }
+                
                 break;
 
             default:
