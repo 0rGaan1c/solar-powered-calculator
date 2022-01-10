@@ -26,6 +26,7 @@ FEATURES ADDED (DONE):
 let screenOutput = '0';
 let screen = document.querySelector("#screen");
 screen.textContent = screenOutput;
+let errorThrown = false;
 
 // Clear the display after a result is shown
 let equalsPressed = false;
@@ -72,6 +73,11 @@ function button(pressed) {
     } else {
         if (equalsPressed) {
             equalsPressed = false;
+        }
+
+        if (errorThrown) {
+            errorThrown = false;
+            screenOutput = '';
         }
         
         // Functionality for buttons other than numbers
@@ -143,6 +149,7 @@ function button(pressed) {
                 try {
                     screenOutput = String(eval(screenOutput));
                 } catch (error) {
+                    errorThrown = true;
                     screenOutput = 'ERROR';
                 }
                 
