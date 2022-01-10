@@ -102,6 +102,10 @@ function button(pressed) {
 
             case 'decimal':
                 // numberPressed is to disallow nonsense input (operators without numbers in-between)
+                if (screenOutput === '' || screenOutput === '0') {
+                    screenOutput += '0.';
+                }
+                
                 if (numberPressed) {
                     screenOutput += '.';
                 }
