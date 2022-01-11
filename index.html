@@ -1,0 +1,71 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="scripts.js" defer></script>
+
+    <title>Solar Calculator</title>
+</head>
+
+<body class="body-light-mode">
+    <div class="header">
+        <h1 class="h1">Solar Calculator</h1>
+        <img onclick="darkMode()" class="img-show" src="lit_bulb.png" />
+        <img onclick="darkMode()" class="img-hide" src="dark_bulb.png" />
+    </div>
+    <div class="container">
+        <div class="calcBox border-light-mode">
+            <div class="screen" id="screen"></div>
+        </div>
+        <div class="triggers">
+            <div class="triggers__row">
+                <button class="border-light-mode background-light-mode" onclick="button('clear')">C</button>
+                <button class="border-light-mode background-light-mode" onclick="button('delete')">DEL</button>
+                <button class="border-light-mode background-light-mode" onclick="button('modulo')">%</button>
+                <button class="border-light-mode background-light-mode" onclick="button('divide')">÷</button>
+            </div>
+            <div class="triggers__row">
+                <button class="border-light-mode background-light-mode" onclick="button(7)">7</button>
+                <button class="border-light-mode background-light-mode" onclick="button(8)">8</button>
+                <button class="border-light-mode background-light-mode" onclick="button(9)">9</button>
+                <button class="border-light-mode background-light-mode" onclick="button('multiply')">x</button>
+            </div>
+            <div class="triggers__row">
+                <button class="border-light-mode background-light-mode" onclick="button(4)">4</button>
+                <button class="border-light-mode background-light-mode" onclick="button(5)">5</button>
+                <button class="border-light-mode background-light-mode" onclick="button(6)">6</button>
+                <button class="border-light-mode background-light-mode" onclick="button('subtract')">-</button>
+            </div>
+            <div class="triggers__row">
+                <button class="border-light-mode background-light-mode" onclick="button(1)">1</button>
+                <button class="border-light-mode background-light-mode" onclick="button(2)">2</button>
+                <button class="border-light-mode background-light-mode" onclick="button(3)">3</button>
+                <button class="border-light-mode background-light-mode" onclick="button('add')">+</button>
+            </div>
+            <div class="triggers__row">
+                <button class="border-light-mode background-light-mode" onclick="button(0)">0</button>
+                <button class="border-light-mode background-light-mode" onclick="button('decimal')">.</button>
+                <button class="border-light-mode background-light-mode" onclick="button('openparen')">(</button>
+                <button class="border-light-mode background-light-mode" onclick="button('closeparen')">)</button>
+            </div>
+            <div class="triggers__row">
+                <button class="border-light-mode background-light-mode" onclick="button('ans')">ANS</button>
+                <button class="border-light-mode background-light-mode" onclick="button('equals')">=</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer class="footer">
+        Made by <a href="https://github.com/lutzke" target="_blank">lutzke</a>,
+        <a href="https://github.com/Gueke4589" target="_blank">Gueke4589</a> and
+        <a href="https://github.com/0rGaan1c" target="_blank">0rGaan1c</a>.
+
+    </footer>
+</body>
+
+</html>
